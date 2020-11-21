@@ -1,0 +1,124 @@
+﻿@model IEnumerable<Data_Training.Models.Lesson>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Lessons</h2>
+
+@if (User.IsInRole("tutor") || User.IsInRole("admin"))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Classroom.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AvgOfRatings)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumOfEnrolment)
+            </th>
+            @if (User.IsInRole("tutor") || User.IsInRole("admin"))
+            {
+                <th></th>
+            }
+            @if (User.IsInRole("admin"))
+            {
+                <th></th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Classroom.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AvgOfRatings)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumOfEnrolment)
+                </td>
+                @if (User.IsInRole("tutor") || User.IsInRole("admin"))
+                {
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                        
+                    </td>
+                }
+                @if (User.IsInRole("admin"))
+                {
+                    <td>
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <canvas id="myChart" width="800" height="600"></canvas>
+</div>
+@section Scripts {
+    @Scripts.Render("~/Scripts/DataTables/jquery.dataTables.js")
+    @Scripts.Render("~/Scripts/DataTables/dataTables.bootstrap.js")
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    <script>
+        var num = @Html.Raw(ViewBag.nums);
+        var name = @Html.Raw(ViewBag.names);
+        var test = ["Introduction of Data Week01","Cloud computing Week01","Big Data Week01"];
+        var ctx = document.getElementById('myChart');
+        var myChart = new Chart(ctx, {
+            type: 'horizontalBar',
+            labels: 'class',
+            data: {
+                labels: name.split(','),
+                datasets: [
+                    {
+                        data: num
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    xAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true,
+                                stepSize: 1
+                            }
+                        }
+                    ]
+                }
+            }
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('.table').DataTable();
+        });
+    </script>
+}
+<link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet" />

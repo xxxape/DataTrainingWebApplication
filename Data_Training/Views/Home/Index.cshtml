@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <picture class="thumbnail" style="position:relative;z-index:-1">
+            <source media="(max-width: 799px)" srcset="~/img/home_background-480.jpg">
+            <source media="(min-width: 800px)" srcset="~/img/home_background-800.jpg">
+            <img src="~/img/home_background-800.jpg">
+        </picture>
+        <div style="text-align:center">
+            <div class="btn" style="margin-top:-30px;background-color:#80d7f6;width:200px">
+                <a href="/Account/Register"><p style="color:black;font-size:large">Join now</p></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+&nbsp;
+<div class="row">
+    <div class="col-md-offset-2 col-md-3">
+        <img src="~/img/material.jpg" class="img-thumbnail" style="position:relative;z-index:-1">
+        <div style="text-align:center">
+            <div class="btn btn-xs" style="margin-top:-30px;background-color:black">
+                <a href="/Materials"><p style="color:white">Get material</p></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-offset-2 col-md-3">
+        <img src="~/img/class.jpg" class="img-thumbnail" style="position:relative;z-index:-1">
+        <div style="text-align:center">
+            <div class="btn btn-xs" style="margin-top:-30px;background-color:black">
+                <a href="/Enrolments"><p style="color:white">View timetable</p></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+&nbsp;
+<div class="row">
+    <div class="col-md-offset-1 col-md-7">
+        <img src="~/img/map.jpg" class="img-thumbnail">
+    </div>
+    <div class="col-md-3">
+        <a href="/Classrooms"><p style="color:black">View classrooms</p></a>
+    </div>
+</div>
